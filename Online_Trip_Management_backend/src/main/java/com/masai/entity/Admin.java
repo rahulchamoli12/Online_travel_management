@@ -1,11 +1,11 @@
 package com.masai.entity;
 
-import jakarta.persistence.DiscriminatorColumn;
+import java.util.List;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -13,8 +13,7 @@ import lombok.Setter;
 @Setter
 @DiscriminatorValue("ADMIN")
 public class Admin extends User {
+
 	
-	
-	
-	
+
 }

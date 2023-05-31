@@ -30,6 +30,6 @@ public abstract class User {
 	private String email;
 	private String password;
 	private String mobile_number;
-	private String address;
-	private boolean isAuthorized;
+	
+
 }

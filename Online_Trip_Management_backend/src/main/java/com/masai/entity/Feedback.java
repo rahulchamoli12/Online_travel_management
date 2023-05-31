@@ -1,32 +1,25 @@
 package com.masai.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Feedback {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer feedbackId;
+	private String customerName;
 	private String feedbackDesciption;
 	private Integer rating;
-	private LocalDate submitTime;
-	
-	
-	
-	
-	
+	@JsonProperty(access = Access.READ_ONLY)
+	private LocalDateTime submitTime;
+
 }

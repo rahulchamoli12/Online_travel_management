@@ -1,9 +1,15 @@
 package com.masai.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +22,26 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Hotel {
 	
+	public enum HotelType{
+		ONE_STAR,THREE_STAR,FIVE_STAR,SEVEN_STAR
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer hotelId;
 	private String hotelName;
 	private String hotelDescription;
-	private String hotelType;
+	
+	@Enumerated(EnumType.STRING)
+	private HotelType hotelType;
 	private Double hotelRent;
 	private String hotelAddress;
 	private String isAvailable;
+	
+	//Relationships
+	
+	    
+    @ManyToMany(mappedBy = "hotels")
+    private List<Package> packages;	
+    
 }
