@@ -2,9 +2,14 @@ package com.masai.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.stereotype.Repository;
+
 import com.masai.entity.CurrentUserSession;
 
-public interface SessionRepository extends JpaRepository<CurrentUserSession, Integer>{
-	public CurrentUserSession findBySessionid(String id);
+@Repository
+public interface SessionRepository extends JpaRepository<CurrentUserSession, Integer> {
+
+	public CurrentUserSession findBySessionId(String sessionId);
 	
 }
+
