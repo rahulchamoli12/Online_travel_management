@@ -21,7 +21,7 @@ public class BusServiceImpl implements BusService{
 	@Override
 	public Bus addBus(String uuid, Bus bus) throws LoginException, BusException {
 		// TODO Auto-generated method stub
-		CurrentUserSession cus = sessionrepo.findBySessionid(uuid);
+		CurrentUserSession cus = sessionrepo.findBySessionId(uuid);
 		if (cus == null) throw new LoginException("Login please");
 		if(bus == null) throw new BusException("Please enter Bus details properly");
 		return busrepo.save(bus);
@@ -30,7 +30,7 @@ public class BusServiceImpl implements BusService{
 	@Override
 	public Bus deleteBus(String uuid, int busid) throws LoginException, BusException {
 		// TODO Auto-generated method stub
-		CurrentUserSession cus = sessionrepo.findBySessionid(uuid);
+		CurrentUserSession cus = sessionrepo.findBySessionId(uuid);
 		if (cus == null) throw new LoginException("Login please");
 		Optional<Bus> ba = busrepo.findById(busid);
 		if(ba.isEmpty()) throw new BusException("Please enter Bus details properly");
@@ -42,7 +42,7 @@ public class BusServiceImpl implements BusService{
 	@Override
 	public Bus updateBus(String uuid, Bus bus) throws LoginException, BusException {
 		// TODO Auto-generated method stub
-		CurrentUserSession cus = sessionrepo.findBySessionid(uuid);
+		CurrentUserSession cus = sessionrepo.findBySessionId(uuid);
 		if (cus == null) throw new LoginException("Login please");
 		Optional<Bus> ba = busrepo.findById(bus.getBusId());
 		if(ba.isEmpty()) throw new BusException("Please enter Bus details properly");
