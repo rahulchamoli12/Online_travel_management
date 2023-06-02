@@ -14,7 +14,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(LoginException.class)
-	public ResponseEntity<MyErrorDetails> GenericExceptionHandler(LoginException lx, WebRequest req) {
+	public ResponseEntity<MyErrorDetails> LoginExceptionHandler(LoginException lx, WebRequest req) {
 
 		MyErrorDetails err = new MyErrorDetails(lx.getMessage(), req.getDescription(false), LocalDateTime.now());
 		ResponseEntity<MyErrorDetails> rs = new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
@@ -49,5 +49,30 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
 
 	}
+	
+	@ExceptionHandler(BookingException.class)
+	public ResponseEntity<MyErrorDetails> BookingsExceptionHandler(BookingException bx, WebRequest req) {
+
+		MyErrorDetails err = new MyErrorDetails(bx.getMessage(), req.getDescription(false), LocalDateTime.now());
+		ResponseEntity<MyErrorDetails> rs = new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+		return rs;
+	}
+	
+	@ExceptionHandler(RouteException.class)
+	public ResponseEntity<MyErrorDetails> RouteExceptionHandler(RouteException rx, WebRequest req) {
+
+		MyErrorDetails err = new MyErrorDetails(rx.getMessage(), req.getDescription(false), LocalDateTime.now());
+		ResponseEntity<MyErrorDetails> rs = new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+		return rs;
+	}
+	
+	@ExceptionHandler(BusException.class)
+	public ResponseEntity<MyErrorDetails> BusExceptionHandler(BusException bx, WebRequest req) {
+
+		MyErrorDetails err = new MyErrorDetails(bx.getMessage(), req.getDescription(false), LocalDateTime.now());
+		ResponseEntity<MyErrorDetails> rs = new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+		return rs;
+	}
+	
 
 }

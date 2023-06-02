@@ -23,7 +23,7 @@ public class RouteServiceImpl implements RouteService{
 
 	@Override
 	public Route addRoute(String uuid, Route route) throws LoginException, RouteException {
-		CurrentUserSession cus = sessionrepo.findBySessionid(uuid);
+		CurrentUserSession cus = sessionrepo.findBySessionId(uuid);
 		if (cus == null) throw new LoginException("Login please");
 		if(route == null) throw new RouteException("Please enter Route details properly");
 		return routerepo.save(route);
@@ -31,7 +31,7 @@ public class RouteServiceImpl implements RouteService{
 
 	@Override
 	public Route updateRoute(String uuid, Route route) throws LoginException, RouteException {
-		CurrentUserSession cus = sessionrepo.findBySessionid(uuid);
+		CurrentUserSession cus = sessionrepo.findBySessionId(uuid);
 		if (cus == null) throw new LoginException("Login please");
 		Optional<Route> ba = routerepo.findById(route.getRouteId());
 		if(ba.isEmpty()) throw new RouteException("Please enter Route details properly");
@@ -40,7 +40,7 @@ public class RouteServiceImpl implements RouteService{
 
 	@Override
 	public Route removeRoute(String uuid, int routeid) throws LoginException, RouteException {
-		CurrentUserSession cus = sessionrepo.findBySessionid(uuid);
+		CurrentUserSession cus = sessionrepo.findBySessionId(uuid);
 		if (cus == null) throw new LoginException("Login please");
 		Optional<Route> ba = routerepo.findById(routeid);
 		if(ba.isEmpty()) throw new RouteException("Please enter Route details properly");
