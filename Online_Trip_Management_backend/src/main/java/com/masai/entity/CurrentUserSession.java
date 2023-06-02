@@ -3,6 +3,8 @@ package com.masai.entity;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +23,8 @@ public class CurrentUserSession {
 	
 	@Id
 	private Integer userId;
-	private String uuid;
+	private String sessionId;
+	@Enumerated(EnumType.STRING)
 	private Role role;
 	private LocalDateTime loginTime;
 }
