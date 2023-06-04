@@ -29,9 +29,9 @@ public class FeedbackController {
 	@Autowired
 	private FeedbackService feedbackService;
 	
-	@PostMapping("/addFeedback/{sessionId}")
-	public ResponseEntity<FeedbackResponse> addFeedback(@Valid @RequestBody Feedback feedback, @PathVariable String sessionId) throws LoginException, CustomerException, FeedbackException{
-		FeedbackResponse feed = feedbackService.addFeedback(sessionId, feedback);
+	@PostMapping("/addFeedback/{sessionId}/{packageId}")
+	public ResponseEntity<FeedbackResponse> addFeedback(@Valid @RequestBody Feedback feedback, @PathVariable String sessionId, @PathVariable Integer packageId) throws LoginException, CustomerException, FeedbackException{
+		FeedbackResponse feed = feedbackService.addFeedback(sessionId, feedback, packageId);
 		return new ResponseEntity<FeedbackResponse>(feed, HttpStatus.OK);
 	}
 	

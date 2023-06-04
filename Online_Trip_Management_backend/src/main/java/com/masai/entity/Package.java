@@ -58,7 +58,7 @@ public class Package {
     @Embedded
     @JoinTable(
             name = "feedback",
-            joinColumns = @JoinColumn(name = "package_id")
+            joinColumns = @JoinColumn(name = "packageId")
         )
     private List<Feedback> feedbacks = new ArrayList<>();
     
