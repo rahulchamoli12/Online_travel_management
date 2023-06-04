@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.masai.dto.BookingDTO;
 import com.masai.entity.Booking;
+import com.masai.exception.AdminException;
 import com.masai.exception.BookingException;
 import com.masai.exception.BusException;
 import com.masai.exception.CustomerException;
@@ -21,6 +22,6 @@ public interface BookingService {
 	
 	public Booking viewBooking(String sessionId,Integer bookingId) throws BookingException, LoginException;
 	
-	public List<Booking> viewAllBooking(String sessionId) throws BookingException, LoginException;
+	public List<Booking> viewAllBooking(String sessionId) throws BookingException, LoginException, AdminException;
 	
 }

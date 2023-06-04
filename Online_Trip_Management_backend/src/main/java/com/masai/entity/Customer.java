@@ -12,17 +12,19 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @DiscriminatorValue("CUSTOMER")
 public class Customer extends User{
 	
 	private String address;
 	
-	
 	// One-to-many relationship with Booking
 	@JsonIgnore
     @OneToMany(mappedBy = "customer")
     private List<Booking> bookings = new ArrayList<>();
+
+	
+	
 }

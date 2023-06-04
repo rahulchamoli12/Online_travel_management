@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.masai.dto.BookingDTO;
 import com.masai.entity.Booking;
 import com.masai.entity.Bus;
+import com.masai.exception.AdminException;
 import com.masai.exception.BookingException;
 import com.masai.exception.BusException;
 import com.masai.exception.CustomerException;
@@ -56,7 +57,7 @@ public class BookingController {
 	}
 	
 	@GetMapping("/viewall/{sessionId}")
-	public ResponseEntity<List<Booking>> viewAllBookingController(@Valid  @PathVariable String sessionId) throws LoginException, BusException, BookingException, UserException, RouteException, PackageException, CustomerException{
+	public ResponseEntity<List<Booking>> viewAllBookingController(@Valid  @PathVariable String sessionId) throws LoginException, BusException, BookingException, UserException, RouteException, PackageException, CustomerException, AdminException{
 		List<Booking> bookings = bookService.viewAllBooking(sessionId);
 		return new ResponseEntity<>(bookings, HttpStatus.OK);
 	}
