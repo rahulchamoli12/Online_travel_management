@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.dto.LoginDTO;
-import com.masai.dto.LogoutDTO;
+import com.masai.dto.ResponseMessage;
 import com.masai.entity.Admin;
 import com.masai.entity.CurrentUserSession;
 import com.masai.entity.CurrentUserSession.Role;
@@ -18,7 +18,7 @@ import com.masai.repository.CustomerRepository;
 import com.masai.repository.SessionRepository;
 
 @Service
-public class LoginServiceImpl implements LoginService {
+public class AuthServiceImpl implements AuthService {
 
 	@Autowired
 	private CustomerRepository customerRepo;
@@ -73,14 +73,14 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public LogoutDTO logoutFromApplication(String sessionId) throws LoginException {
+	public ResponseMessage logoutFromApplication(String sessionId) throws LoginException {
 
 		CurrentUserSession loginUserSession = sessionRepo.findBySessionId(sessionId);
 		if (loginUserSession == null)
 			throw new LoginException("Not login into application!");
 		
 		sessionRepo.delete(loginUserSession);
-		return new LogoutDTO("Successfully logout...");
+		return new ResponseMessage("Successfully logout...");
 	}
 
 }
