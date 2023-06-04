@@ -17,5 +17,5 @@ public interface PackageService {
 	
 	public List<Package> viewAllPackages() throws PackageException, LoginException, AdminException;
 	
-	
+	public Package searchByPackageTitle(String packageTitle) throws PackageException, AdminException;
 }

@@ -43,7 +43,7 @@ public class Booking {
     private Customer customer;
 	
     // Many-to-one relationship with Package
-	@JsonProperty(access = Access.READ_ONLY)
+	@JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "packageId")
     private Package tourPackage;

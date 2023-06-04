@@ -61,6 +61,9 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private PackageRepository packageRepo;
 
+	@Autowired
+	private EmailsenderService emailService;
+
 	@Override
 	public Booking makeBooking(String sessionId, BookingDTO bookingdto) throws BookingException, LoginException,
 			UserException, RouteException, PackageException, CustomerException, BusException, HotelException {
@@ -132,6 +135,15 @@ public class BookingServiceImpl implements BookingService {
 			throw new BookingException("booking not found");
 		Booking cancelBook = booking.get();
 		cancelBook.getTicketDetails().setTicketStatus(Status.CANCELED);
+
+		// Send an email .
+		String emailSubject = "Booking Cancelled Successfully";
+		String interviewerBody = "Dear " + "Rahul your booking cancelled successfully of "
+				+ cancelBook.getBookingTitle();
+
+		String email = "rahulchamoli518@gmail.com";
+		emailService.sendEmail(email, emailSubject, interviewerBody);
+
 		return bookRepo.save(cancelBook);
 	}
 

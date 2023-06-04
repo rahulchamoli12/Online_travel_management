@@ -57,5 +57,11 @@ public class PackageController {
 		return new ResponseEntity<>(pp, HttpStatus.OK);
 	}
 	
+	@GetMapping("/searchByTitle/{packageTitle}")
+	public ResponseEntity<Package> searchByTitlePackageController(@Valid @PathVariable String packageTitle) throws PackageException, LoginException, AdminException {
+		Package pp = packService.searchByPackageTitle(packageTitle);
+		return new ResponseEntity<>(pp, HttpStatus.OK);
+	}
+	
 	
 }
