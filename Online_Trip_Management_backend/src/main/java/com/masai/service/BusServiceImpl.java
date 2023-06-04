@@ -3,6 +3,7 @@ package com.masai.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.masai.entity.Bus;
 import com.masai.entity.CurrentUserSession;
@@ -11,6 +12,7 @@ import com.masai.exception.LoginException;
 import com.masai.repository.BusRepository;
 import com.masai.repository.SessionRepository;
 
+@Service
 public class BusServiceImpl implements BusService{
 
 	@Autowired

@@ -21,7 +21,7 @@ import com.masai.service.RouteService;
 
 import jakarta.validation.Valid;
 
-@RestController("/online/trip/route")
+@RestController
 @CrossOrigin("*")
 public class RouteController {
 	@Autowired
@@ -33,25 +33,25 @@ public class RouteController {
 		return new ResponseEntity<Route>(ru, HttpStatus.OK);
 	}
 	
-	@PutMapping("update/{uuid}")
+	@PutMapping("/update/{uuid}")
 	public ResponseEntity<Route> updateRoute(@Valid @RequestBody Route route, @PathVariable String uuid) throws LoginException, RouteException{
 		Route ru = routeService.updateRoute(uuid, route);
 		return new ResponseEntity<Route>(ru, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("remove/{uuid}/{routeid}")
+	@DeleteMapping("/remove/{uuid}/{routeid}")
 	public ResponseEntity<Route> removeRoute(@PathVariable String uuid, @PathVariable int routeid) throws LoginException, RouteException{
 		Route ru = routeService.removeRoute(uuid, routeid);
 		return new ResponseEntity<Route>(ru, HttpStatus.OK);
 	}
 	
-	@GetMapping("search/{routeid}")
+	@GetMapping("/search/{routeid}")
 	public ResponseEntity<Route> searchRoute(@PathVariable int routeid) throws LoginException, RouteException{
 		Route ru = routeService.searchRoute(routeid);
 		return new ResponseEntity<Route>(ru, HttpStatus.OK);
 	}
 	
-	@GetMapping("allroutes")
+	@GetMapping("/allroutes")
 	public ResponseEntity<List<Route>> allRoute() throws LoginException, RouteException{
 		List<Route> list = routeService.viewRouteList();
 		return new ResponseEntity<List<Route>>(list, HttpStatus.OK);

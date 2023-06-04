@@ -23,7 +23,7 @@ public class BusController {
 	@Autowired
 	private BusService busService;
 	
-	@PostMapping("/add/{uuid}")
+	@PostMapping("/addBus/{uuid}")
 	public ResponseEntity<Bus> addBus(@Valid @RequestBody Bus bus, @PathVariable String uuid) throws LoginException, BusException{
 		Bus bu = busService.addBus(uuid, bus);
 		return new ResponseEntity<Bus>(bu, HttpStatus.OK);

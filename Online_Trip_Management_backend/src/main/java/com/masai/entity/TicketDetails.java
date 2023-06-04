@@ -2,6 +2,10 @@ package com.masai.entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -32,7 +36,9 @@ public class TicketDetails {
 	@Enumerated(EnumType.STRING)
 	private Status ticketStatus;
 	private LocalDate ticketDate;
-
+	private LocalDate expireDate;
+	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "booking_id")
 	private Booking booking;
