@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.masai.entity.Admin;
 import com.masai.entity.CurrentUserSession;
+import com.masai.entity.CurrentUserSession.Role;
 import com.masai.entity.Customer;
 import com.masai.entity.Package;
 import com.masai.exception.AdminException;
@@ -19,29 +20,30 @@ import com.masai.repository.PackageRepository;
 import com.masai.repository.SessionRepository;
 
 @Service
-public class PackageServiceImpl implements PackageService{
+public class PackageServiceImpl implements PackageService {
 
 	@Autowired
 	private PackageRepository packageRepo;
-	
+
 	@Autowired
 	private AdminRepository adminRepo;
-	
+
 	@Autowired
 	private SessionRepository sessRepo;
-	
-	
+
 	@Override
-	public Package addPackage(String sessionId,Package pack) throws PackageException, LoginException, AdminException {
+	public Package addPackage(String sessionId, Package pack) throws PackageException, LoginException, AdminException {
 		CurrentUserSession cus = sessRepo.findBySessionId(sessionId);
 		if (cus == null)
 			throw new LoginException("you're not logged in");
-		Optional<Admin> admin = adminRepo.findById(cus.getUserId());
-		if (admin.isEmpty())
-			throw new AdminException("user not authorized");
-		return packageRepo.save(pack);
-	}
 
+		if (cus.getRole() == Role.ADMIN) {
+			return packageRepo.save(pack);
+		} else {
+			throw new AdminException("user not authorized");
+		}
+
+	}
 
 	@Override
 	public Package deletePackage(String sessionId, Integer packageId)
@@ -49,16 +51,15 @@ public class PackageServiceImpl implements PackageService{
 		CurrentUserSession cus = sessRepo.findBySessionId(sessionId);
 		if (cus == null)
 			throw new LoginException("you're not logged in");
-		Optional<Admin> admin = adminRepo.findById(cus.getUserId());
-		if (admin.isEmpty())
+		if (cus.getRole() != Role.ADMIN) {
 			throw new AdminException("user not authorized");
+		}
 		Optional<Package> pack = packageRepo.findById(packageId);
 		if (pack.isEmpty())
 			throw new PackageException("package not found");
 		packageRepo.delete(pack.get());
 		return pack.get();
 	}
-
 
 	@Override
 	public Package searchPackage(Integer packageId) throws PackageException, LoginException, AdminException {
@@ -68,13 +69,20 @@ public class PackageServiceImpl implements PackageService{
 		return pack.get();
 	}
 
-
 	@Override
 	public List<Package> viewAllPackages() throws PackageException, LoginException, AdminException {
 		List<Package> packages = packageRepo.findAll();
-		if (packages.size()==0)
+		if (packages.size() == 0)
 			throw new PackageException("package not found");
 		return packages;
+	}
+
+	@Override
+	public Package searchByPackageTitle(String packageTitle) throws PackageException, AdminException {
+		Package packa = packageRepo.findByPackageName(packageTitle);
+		if (packa==null)
+			throw new PackageException("package not found");
+		return packa;
 	}
 
 }
