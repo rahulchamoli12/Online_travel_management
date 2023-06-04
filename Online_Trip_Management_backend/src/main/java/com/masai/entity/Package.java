@@ -1,7 +1,13 @@
 package com.masai.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -35,17 +41,18 @@ public class Package {
 	// relations
 	
 	 // One-to-many relationship with Booking
+	@JsonIgnore
     @OneToMany(mappedBy = "tourPackage")
-    private List<Booking> bookings;
+    private List<Booking> bookings = new ArrayList<>();
     
 	// Relationship mappings
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "package_hotel",
         joinColumns = @JoinColumn(name = "package_id"),
         inverseJoinColumns = @JoinColumn(name = "hotel_id")
     )
-    private List<Hotel> hotels;
+    private List<Hotel> hotels = new ArrayList<>();
 	
     @ElementCollection
     @Embedded
@@ -53,6 +60,8 @@ public class Package {
             name = "feedback",
             joinColumns = @JoinColumn(name = "package_id")
         )
-    private List<Feedback> feedbacks;
+    private List<Feedback> feedbacks = new ArrayList<>();
+    
+    
 	
 }

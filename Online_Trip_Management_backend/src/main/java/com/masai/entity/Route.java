@@ -1,9 +1,10 @@
 package com.masai.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,12 +29,11 @@ public class Route {
 	private String routeTo;
 	private LocalDateTime arrival;
 	private LocalDateTime departure;
-	private LocalDate dateOfJourney;
 	private String pickUpPoint;
-	private double fare;
+	
 
 	// Relationship mappings
-	@OneToMany(mappedBy = "route")
-	private List<Bus> buses;
+	@OneToMany(mappedBy = "route",cascade = CascadeType.ALL)
+	private List<Bus> buses = new ArrayList<>();
 
 }

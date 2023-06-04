@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<MyErrorDetails> GenericExceptionHandler(Exception ex, WebRequest req) {
+	public ResponseEntity<MyErrorDetails> ParentExceptionHandler(Exception ex, WebRequest req) {
 		
 		MyErrorDetails err = new MyErrorDetails(ex.getMessage(), req.getDescription(false), LocalDateTime.now());
 		ResponseEntity<MyErrorDetails> rs = new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
@@ -70,6 +70,14 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<MyErrorDetails> BusExceptionHandler(BusException bx, WebRequest req) {
 
 		MyErrorDetails err = new MyErrorDetails(bx.getMessage(), req.getDescription(false), LocalDateTime.now());
+		ResponseEntity<MyErrorDetails> rs = new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+		return rs;
+	}
+	
+	@ExceptionHandler(AdminException.class)
+	public ResponseEntity<MyErrorDetails> AdminExceptionHandler(AdminException ax, WebRequest req) {
+
+		MyErrorDetails err = new MyErrorDetails(ax.getMessage(), req.getDescription(false), LocalDateTime.now());
 		ResponseEntity<MyErrorDetails> rs = new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
 		return rs;
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.masai.entity.Bus;
 import com.masai.entity.CurrentUserSession;
@@ -14,6 +15,7 @@ import com.masai.exception.RouteException;
 import com.masai.repository.RouteRepository;
 import com.masai.repository.SessionRepository;
 
+@Service
 public class RouteServiceImpl implements RouteService{
 	
 	@Autowired
@@ -26,6 +28,10 @@ public class RouteServiceImpl implements RouteService{
 		CurrentUserSession cus = sessionrepo.findBySessionId(uuid);
 		if (cus == null) throw new LoginException("Login please");
 		if(route == null) throw new RouteException("Please enter Route details properly");
+		List<Bus> buses = route.getBuses();
+		for(Bus b : buses) {
+			b.setRoute(route);
+		}
 		return routerepo.save(route);
 	}
 

@@ -1,5 +1,6 @@
 package com.masai.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -27,6 +28,6 @@ public class Report {
 	private String reportType;
 
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "report")
-	private List<PaymentDetails> paymentList;
+	private List<PaymentDetails> paymentList = new ArrayList<>();
 
 }
