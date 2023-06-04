@@ -16,6 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Feedback {
 	private Integer feedbackId;
+	private Integer packageId;
 	private String customerName;
 	private String feedbackDesciption;
 	private Integer rating;
