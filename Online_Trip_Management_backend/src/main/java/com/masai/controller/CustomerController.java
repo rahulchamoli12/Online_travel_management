@@ -75,7 +75,5 @@ public class CustomerController {
 		List<Customer> customers  = customerService.getAllCustomer(sessionId);
 		return new ResponseEntity<>(customers, HttpStatus.ACCEPTED);
 	}
-	
-	
-
+		
 }

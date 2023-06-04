@@ -1,18 +1,26 @@
 package com.masai.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.dto.ChangePasswordByOTP;
+import com.masai.dto.ResponseMessage;
 import com.masai.entity.CurrentUserSession;
 import com.masai.entity.CurrentUserSession.Role;
 import com.masai.entity.Customer;
+import com.masai.entity.OTP;
+import com.masai.entity.User;
 import com.masai.exception.AdminException;
 import com.masai.exception.CustomerException;
 import com.masai.exception.LoginException;
+import com.masai.exception.WrongOTPException;
 import com.masai.repository.CustomerRepository;
+import com.masai.repository.OtpRepository;
 import com.masai.repository.SessionRepository;
 
 /**
@@ -28,6 +36,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private SessionRepository sessionRepo;
+
+	@Autowired
+	private EmailsenderService emailService;
+
+	@Autowired
+	private OtpRepository otpRepository;
 
 	@Override
 	public Customer registerNewCustomer(Customer customer) throws CustomerException {
@@ -130,6 +144,45 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 
 		throw new AdminException("User Not Authorized!");
+	}
+
+	@Override
+	public ResponseMessage sendOtp(OTP otp) throws CustomerException {
+
+		Customer customer = customerRepo.findByEmail(otp.getEmail());
+		if (customer == null) {
+			throw new CustomerException("Email not found");
+		}
+		Random randomOtp = new Random();
+		int min = 100000, max = 999999;
+		int otpCreated = randomOtp.nextInt(max - min) + min;
+		otp.setOtp(otpCreated);
+		// OTP will expire in 10 minutes
+		otp.setCreatedAt(LocalDateTime.now());
+		// Send an email to reset the password
+		String emailSubject = "Reset Password";
+		String emailBody = "Dear " + customer.getUsername() + ",\n\nYour OTP is " + otpCreated
+				+ " to reset your password it is valid for 10 minutes" + "\n\nBest regards,\nThe Imperial Trip Team";
+		emailService.sendEmail(customer.getEmail(), emailSubject, emailBody);
+
+		otpRepository.save(otp);
+
+		return new ResponseMessage("OTP has been send to your email");
+	}
+
+	public ResponseMessage verifyOtpAndChangePassword(ChangePasswordByOTP changePass)
+			throws CustomerException, WrongOTPException {
+
+		OTP otp = otpRepository.findByEmail(changePass.getEmail())
+				.orElseThrow(() -> new CustomerException("User not found"));
+		if (otp.getOtp() != changePass.getOtp()) {
+			throw new WrongOTPException("Wrong otp");
+		}
+		Customer customer = customerRepo.findByEmail(otp.getEmail());
+		customer.setPassword(changePass.getNewPassword());
+		customerRepo.save(customer);
+
+		return new ResponseMessage("Password updated successfully");
 	}
 
 }

@@ -5,10 +5,14 @@ package com.masai.service;
 
 import java.util.List;
 
+import com.masai.dto.ChangePasswordByOTP;
+import com.masai.dto.ResponseMessage;
 import com.masai.entity.Customer;
+import com.masai.entity.OTP;
 import com.masai.exception.AdminException;
 import com.masai.exception.CustomerException;
 import com.masai.exception.LoginException;
+import com.masai.exception.WrongOTPException;
 
 /**
  * @author Aman_Maurya
@@ -27,5 +31,9 @@ public interface CustomerService {
 	public Customer getCustomerByCustomerId(String sessionId,Integer customerId) throws LoginException,CustomerException,AdminException; 
 	
 	public List<Customer> getAllCustomer(String sessionId) throws LoginException,AdminException, CustomerException;
+
+	public ResponseMessage sendOtp(OTP otp) throws CustomerException;
+	
+	public ResponseMessage verifyOtpAndChangePassword(ChangePasswordByOTP changePass) throws CustomerException, WrongOTPException;
 	
 }
