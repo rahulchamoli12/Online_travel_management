@@ -1,5 +1,8 @@
 package com.masai.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
@@ -19,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "role" , discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name="role", discriminatorType = DiscriminatorType.STRING)
 public abstract class User {
 	
 	@Id
@@ -28,8 +31,11 @@ public abstract class User {
 	
 	private String username;
 	private String email;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	private String mobile_number;
+	
+	
 	
 
 }
