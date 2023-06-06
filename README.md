@@ -41,7 +41,9 @@
 
 ## ER Diagram
 - The following Diagram depicts the flow of our Entity Relation Diagram to simplify the work flow.
-![Online_trip_management_ER](https://github.com/rahulchamoli12/Online_trip_management/assets/79252872/6e20ac71-b8ce-4ec7-9cf4-bc152357d909)
+![Online_trip_management_ER](https://github.com/rahulchamoli12/Online_travel_management/assets/79252872/f0a8e475-dbae-40bf-9c92-0cad03405953)
+
+
 
 
 ## Installation & Run
