@@ -41,7 +41,8 @@
 
 ## ER Diagram
 - The following Diagram depicts the flow of our Entity Relation Diagram to simplify the work flow.
-file:///C:/Users/lenovo/Desktop/Online_trip_management_ER.png
+![Online_trip_management_ER](https://github.com/rahulchamoli12/Online_trip_management/assets/79252872/6e20ac71-b8ce-4ec7-9cf4-bc152357d909)
+
 
 ## Installation & Run
 - Before running the API server, you should update the database config inside the application.properties file.
