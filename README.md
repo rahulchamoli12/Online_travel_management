@@ -53,3 +53,8 @@
     spring.datasource.username=root
     spring.datasource.password=root
 ```
+
+## API Root Endpoint
+`http://localhost:8088/`
+
+`http://localhost:8088/swagger-ui/`
