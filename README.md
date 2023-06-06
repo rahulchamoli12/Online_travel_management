@@ -13,9 +13,9 @@
   - Only logged in user can access his trip history, profile updation and other features
 
 ## Contributors
-- Aman maurya
-- Rounak Dhatterwal
-- Rahul Chamoli
+- Rahul Chamoli - Employee
+- Aman maurya - Manager
+- Rounak Dhatterwal - Assisstant CEO
 
 ## Tech Stack
 - Java
