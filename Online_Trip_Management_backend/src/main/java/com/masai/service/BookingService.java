@@ -16,12 +16,15 @@ import com.masai.exception.UserException;
 
 public interface BookingService {
 	
+	
 	public Booking makeBooking(String uuid , BookingDTO bookingdto) throws BookingException,LoginException,UserException, RouteException, PackageException, CustomerException, BusException, HotelException;
 	
-	public Booking cancelBooking(String sessionId, Integer bookingId) throws BookingException, LoginException;
+	public Booking cancelBooking(String sessionId, Integer bookingId) throws BookingException, LoginException, CustomerException;
 	
 	public Booking viewBooking(String sessionId,Integer bookingId) throws BookingException, LoginException;
 	
 	public List<Booking> viewAllBooking(String sessionId) throws BookingException, LoginException, AdminException;
+	
+
 	
 }

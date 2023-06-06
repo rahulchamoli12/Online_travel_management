@@ -10,14 +10,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.entity.Bus;
+import com.masai.entity.Hotel;
 import com.masai.entity.Package;
 import com.masai.exception.AdminException;
 import com.masai.exception.BusException;
+import com.masai.exception.HotelException;
 import com.masai.exception.LoginException;
 import com.masai.exception.PackageException;
 import com.masai.service.PackageService;
@@ -61,6 +64,25 @@ public class PackageController {
 	public ResponseEntity<Package> searchByTitlePackageController(@Valid @PathVariable String packageTitle) throws PackageException, LoginException, AdminException {
 		Package pp = packService.searchByPackageTitle(packageTitle);
 		return new ResponseEntity<>(pp, HttpStatus.OK);
+	}
+	
+	@PutMapping("/assignHotel/{sessionId}")
+	public ResponseEntity<Package> assignHotelToPackageController(@Valid  @PathVariable String sessionId,@RequestParam("hotelId") Integer hotelId,@RequestParam("packageId") Integer packageId) throws PackageException, LoginException, AdminException, HotelException {
+		Package pp = packService.assignHotelToPackage(sessionId, hotelId, packageId);
+		return new ResponseEntity<>(pp, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getAvailableHotels/{packageId}")
+	public ResponseEntity<List<Hotel> > getAvailableHotelsController(@Valid  @PathVariable  Integer packageId) throws PackageException, LoginException, AdminException, HotelException {
+		List<Hotel> hotels = packService.getAvailableHotels(packageId);
+		return new ResponseEntity<>(hotels, HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/getAllHotels/{sessionId}")
+	public ResponseEntity<List<Hotel> > getAllHotelsController(@Valid  @PathVariable String sessionId,@RequestParam("packageId") Integer packageId) throws PackageException, LoginException, AdminException, HotelException {
+		List<Hotel> hotels = packService.getAllHotels(sessionId, packageId);
+		return new ResponseEntity<>(hotels, HttpStatus.OK);
 	}
 	
 	

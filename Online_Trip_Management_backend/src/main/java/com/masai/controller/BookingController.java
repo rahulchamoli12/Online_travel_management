@@ -38,24 +38,43 @@ public class BookingController {
 	@Autowired
 	private BookingService bookService;
 	
+	/**
+	 * @param bookingdto  The booking details.
+	 * @param sessionId   The session ID of the user.
+	 * @return            The created booking.
+	 */
 	@PostMapping("/make/{sessionId}")
 	public ResponseEntity<Booking> addBookingController(@Valid @RequestBody BookingDTO bookingdto, @PathVariable String sessionId) throws LoginException, BusException, BookingException, UserException, RouteException, PackageException, CustomerException, HotelException{
 		Booking book = bookService.makeBooking(sessionId, bookingdto);
 		return new ResponseEntity<>(book, HttpStatus.ACCEPTED);
 	}
 	
+	/**
+	 * @param sessionId   The session ID of the user.
+	 * @param bookingId   The ID of the booking to cancel.
+	 * @return            The canceled booking.	
+	 */
 	@PutMapping("/cancel/{sessionId}")
 	public ResponseEntity<Booking> cancelBookingController(@Valid  @PathVariable String sessionId,@RequestParam("bookingId") Integer bookingId) throws LoginException, BusException, BookingException, UserException, RouteException, PackageException, CustomerException{
 		Booking book = bookService.cancelBooking(sessionId, bookingId);
 		return new ResponseEntity<>(book, HttpStatus.OK);
 	}
 	
+	/**
+	 * @param sessionId   The session ID of the user.
+	 * @param bookingId   The ID of the booking to view.
+	 * @return            The viewed booking.
+	 */
 	@GetMapping("/view/{sessionId}")
 	public ResponseEntity<Booking> viewBookingController(@Valid  @PathVariable String sessionId,@RequestParam("bookingId") Integer bookingId) throws LoginException, BusException, BookingException, UserException, RouteException, PackageException, CustomerException{
 		Booking book = bookService.viewBooking(sessionId, bookingId);
 		return new ResponseEntity<>(book, HttpStatus.OK);
 	}
 	
+	/**
+	 * @param sessionId   The session ID of the user.
+	 * @return            The list of all bookings.
+	 */
 	@GetMapping("/viewall/{sessionId}")
 	public ResponseEntity<List<Booking>> viewAllBookingController(@Valid  @PathVariable String sessionId) throws LoginException, BusException, BookingException, UserException, RouteException, PackageException, CustomerException, AdminException{
 		List<Booking> bookings = bookService.viewAllBooking(sessionId);

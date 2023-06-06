@@ -41,7 +41,7 @@ public class Hotel {
 	private HotelType hotelType;
 	private Double hotelRent;
 	private String hotelAddress;
-	private String isAvailable;
+	private boolean isAvailable;
 	
 	//Relationships
 	@JsonIgnore
