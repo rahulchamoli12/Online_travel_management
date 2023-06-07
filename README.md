@@ -30,6 +30,7 @@
 ## Modules
 - Login, Logout Module
 - Packages Module
+- User Module
 - Booking Module
 - TicketDetails Module
 - Route Module
