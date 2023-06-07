@@ -41,12 +41,17 @@
 - Report Module
 - Feedback Module
 
+## Flow Chart
+- The following Diagram depicts the flow of our application to simplify the flow.
+
+
+![Trevel-Management-FlowChart](https://github.com/rahulchamoli12/Online_travel_management/assets/105871693/ed95fdb2-01ee-4273-a520-0c5a6025010e)
+
 ## ER Diagram
 - The following Diagram depicts the flow of our Entity Relation Diagram to simplify the work flow.
+
+
 ![Online_trip_management_ER](https://github.com/rahulchamoli12/Online_travel_management/assets/79252872/f0a8e475-dbae-40bf-9c92-0cad03405953)
-
-
-
 
 ## Installation & Run
 - Before running the API server, you should update the database config inside the application.properties file.
