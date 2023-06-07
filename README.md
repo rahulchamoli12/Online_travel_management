@@ -26,6 +26,7 @@
 - Hibernate
 - Maven
 - MySQL
+- SMTP Server
 
 ## Modules
 - Login, Logout Module
