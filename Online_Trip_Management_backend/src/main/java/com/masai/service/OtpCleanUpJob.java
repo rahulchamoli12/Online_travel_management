@@ -10,9 +10,17 @@ import org.springframework.stereotype.Component;
 import com.masai.entity.OTP;
 import com.masai.repository.OtpRepository;
 
+
+/**
+ * 
+ * @author Aman_Maurya
+ *
+ *This class is used to Delete OTP from record from after 10 minute of registered time
+ */
 @Component
 public class OtpCleanUpJob {
 
+	
     @Autowired
     private OtpRepository otpRepository;
 

@@ -31,21 +31,36 @@ public class AuthController {
 	
 	@Autowired
 	private CustomerService customerService;
-	
+	/**
+	 * 
+	 * @param dto  				The User Credentials
+	 * @return 					The Current User Session with Session ID
+	 * @throws LoginException 	If User Not Registered
+	 */
 	@PostMapping("/login")
 	public ResponseEntity<CurrentUserSession> loginIntoApplication(@RequestBody LoginDTO dto) throws LoginException{
 		CurrentUserSession cus = loginService.logIntoApplication(dto);
 		
 		return new ResponseEntity<>(cus,HttpStatus.ACCEPTED);		
 	}
-	
+	/**
+	 * 
+	 * @param sessionId			The Unique Session Id
+	 * @return					Response Message
+	 * @throws LoginException	If User Not Login
+	 */
 	@PostMapping("/logout")
 	public ResponseEntity<ResponseMessage> logoutFromApplication(@RequestParam("sessionId") String sessionId) throws LoginException{
 		ResponseMessage responseMessage = loginService.logoutFromApplication(sessionId);
 		
 		return new ResponseEntity<>(responseMessage,HttpStatus.ACCEPTED);	
 	}
-	
+	/**
+	 * 
+	 * @param email					The User Email
+	 * @return						Response Message
+	 * @throws CustomerException	If User Not Registered
+	 */
 	@PostMapping("/forgotpassword/{email}")
 	public ResponseEntity<ResponseMessage> sendOTP(@PathVariable String email) throws CustomerException {
 		email = email.toLowerCase();
@@ -54,7 +69,13 @@ public class AuthController {
 		ResponseMessage responseMessage = customerService.sendOtp(otp);
 		return new ResponseEntity<>(responseMessage,HttpStatus.CREATED);
 	}
-	
+	/**
+	 * 
+	 * @param changepass			The User Email and New Password 
+	 * @return						Response Message
+	 * @throws CustomerException	If User Not Registered
+	 * @throws WrongOTPException	If OTP Not Verified
+	 */
 	@PutMapping("/verify")
 	public ResponseEntity<ResponseMessage> verifyOTP(@RequestBody ChangePasswordByOTP changepass) throws CustomerException, WrongOTPException{
 		ResponseMessage responseMessage = customerService.verifyOtpAndChangePassword(changepass);

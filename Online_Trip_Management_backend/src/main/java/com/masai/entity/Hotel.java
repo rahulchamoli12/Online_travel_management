@@ -24,7 +24,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Hotel {
 	
 	public enum HotelType{
@@ -35,6 +34,7 @@ public class Hotel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer hotelId;
 	private String hotelName;
+	private String email;
 	private String hotelDescription;
 	
 	@Enumerated(EnumType.STRING)
@@ -43,6 +43,19 @@ public class Hotel {
 	private String hotelAddress;
 	private boolean isAvailable;
 	
+	public Hotel(Integer hotelId, String hotelName, String email, String hotelDescription, HotelType hotelType,
+			Double hotelRent, String hotelAddress, boolean isAvailable) {
+		super();
+		this.hotelId = hotelId;
+		this.hotelName = hotelName;
+		this.email = email;
+		this.hotelDescription = hotelDescription;
+		this.hotelType = hotelType;
+		this.hotelRent = hotelRent;
+		this.hotelAddress = hotelAddress;
+		this.isAvailable = isAvailable;
+	}
+
 	//Relationships
 	@JsonIgnore
     @ManyToMany(mappedBy = "hotels")
@@ -52,6 +65,14 @@ public class Hotel {
  	@JsonIgnore
  	@OneToMany(mappedBy = "hotel")
  	private List<Booking> bookings= new ArrayList<>();
+
+	@Override
+	public String toString() {
+		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", email=" + email + ", hotelDescription="
+				+ hotelDescription + ", hotelType=" + hotelType + ", hotelRent=" + hotelRent + ", hotelAddress="
+				+ hotelAddress + ", isAvailable=" + isAvailable + "]";
+	}
  
+ 	
     
 }
