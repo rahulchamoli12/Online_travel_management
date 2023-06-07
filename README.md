@@ -14,7 +14,7 @@
 
 ## Contributors
 - Rahul Chamoli 
-- Aman maurya 
+- Aman Maurya 
 - Rounak Dhatterwal 
 
 ## Tech Stack
