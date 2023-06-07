@@ -128,7 +128,7 @@ public class BookingServiceImpl implements BookingService {
 		newBooking.setTourPackage(packages);
 
 		PaymentDetails pm = new PaymentDetails();
-		PaymentType payType = PaymentType.valueOf(bookingdto.getPaymentType());
+		PaymentType payType = PaymentType.valueOf((bookingdto.getPaymentType()).toUpperCase());
 		pm.setPaymentType(payType);
 		pm.setPaymentDate(LocalDateTime.now());
 		pm.setAmount(bookingdto.getAmount());

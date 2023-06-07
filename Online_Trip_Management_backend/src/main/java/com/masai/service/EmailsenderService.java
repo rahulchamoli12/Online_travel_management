@@ -7,6 +7,13 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+/**
+ * 
+ * @author Aman_Maurya
+ * 
+ * This class is used to connect with SMTP server and provide sendMessage Method
+ *
+ */
 
 @Component
 public class EmailsenderService {
